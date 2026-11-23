@@ -1,0 +1,37 @@
+=== A. Proposed weights W_LiDAR = exp(-gamma*alpha), W_Radar = 1 - W_LiDAR ===
+alpha = 3.912/V from our fog levels. gamma is not defined anywhere in the proposal, so several are tried.
+fog          alpha      W_L g=1     W_L g=10    W_L g=100
+clear      0.00020        1.000        0.998        0.981
+light      0.00196        0.998        0.981        0.822
+moderate   0.00782        0.992        0.925        0.457
+dense      0.03912        0.962        0.676        0.020
+
+=== B. Actual two-way LiDAR transmittance exp(-2*alpha*R) in our model ===
+fog             R=50m      R=100m      R=300m     R=1000m     R=3000m
+clear          0.9806      0.9616      0.8893      0.6762      0.3093
+light          0.8223      0.6762      0.3093      0.0200      0.0000
+moderate       0.4573      0.2091      0.0091      0.0000      0.0000
+dense          0.0200      0.0004      0.0000      0.0000      0.0000
+
+=== C. Range-estimate RMSE (m) when BOTH sensors detect; N = 4000 trials per cell ===
+fog        R(m)  both%   LiDAR only   Radar only   Ours(conf)   Theirs g=1  Theirs g=10 Theirs g=100  InvVar(opt)
+clear        50  85.6%         2.99        15.11         7.66         2.99         2.99         2.94         2.92
+clear       100  85.2%         3.00        15.25         7.77         2.99         2.99         2.95         2.94
+clear       300  79.0%         3.02        15.29         7.87         3.02         3.01         2.97         2.95
+clear      1000  55.8%         3.00        14.84         9.10         3.00         2.99         2.95         2.93
+clear      3000  21.8%         3.09        15.62        12.23         3.09         3.08         3.06         3.06
+light        50  71.3%         4.40        14.79         8.15         4.39         4.31         4.42         4.19
+light       100  59.2%         4.51        15.25         9.39         4.50         4.43         4.56         4.31
+light       300  27.0%         4.55        15.27        11.81         4.54         4.46         4.54         4.31
+light      1000   1.6%         5.12        15.72        13.33         5.11         5.10         5.60         5.17
+light      3000   0.0%   (too few joint detections to estimate)
+moderate     50  39.1%         7.39        15.46        11.18         7.33         6.92         9.01         6.64
+moderate    100  15.9%         7.71        15.57        12.57         7.65         7.19         9.05         6.82
+moderate    300   0.8%         7.75        11.49         9.71         7.69         7.25         7.30         6.70
+moderate   1000   0.0%   (too few joint detections to estimate)
+moderate   3000   0.0%   (too few joint detections to estimate)
+dense        50   1.6%        16.33        15.97        13.77        15.76        12.51        15.68        11.81
+dense       100   0.0%   (too few joint detections to estimate)
+dense       300   0.0%   (too few joint detections to estimate)
+dense      1000   0.0%   (too few joint detections to estimate)
+dense      3000   0.0%   (too few joint detections to estimate)

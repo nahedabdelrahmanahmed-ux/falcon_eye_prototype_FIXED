@@ -1,0 +1,47 @@
+=== 1. Wavelength ratio (claimed '~3,000x longer than 905 nm') ===
+77 GHz wavelength = 3.893 mm;  905 nm LiDAR = 905 nm
+ratio = 4,302x   (claim was ~3,000x)
+
+=== 2. Do fog droplets 'match' the 905 nm wavelength? size parameter x = 2*pi*r/lambda ===
+droplet diameter  4 um: x(905 nm) =   13.9   x(77 GHz) = 0.0032
+droplet diameter 10 um: x(905 nm) =   34.7   x(77 GHz) = 0.0081
+droplet diameter 20 um: x(905 nm) =   69.4   x(77 GHz) = 0.0161
+
+=== 3. Extinction values: V = 3.912/alpha ===
+alpha = 0.05 /m  ->  visibility =   78.2 m
+alpha = 0.25 /m  ->  visibility =   15.6 m
+alpha = 0.50 /m  ->  visibility =    7.8 m
+alpha = 0.55 /m  ->  visibility =    7.1 m
+alpha = 0.85 /m  ->  visibility =    4.6 m
+Our model's fog levels:
+  clear    V =  20000 m -> alpha = 0.00020 /m
+  light    V =   2000 m -> alpha = 0.00196 /m
+  moderate V =    500 m -> alpha = 0.00782 /m
+  dense    V =    100 m -> alpha = 0.03912 /m
+
+=== 4. Round-trip fog loss in dB (ITU-R P.840, 0 C) ===
+
+DENSE fog (M=0.5 g/m3, ~50 m vis)
+band           0.25km    1.00km    3.00km    5.00km    9.00km
+X 10 GHz          0.0       0.1       0.3       0.5       0.8
+K 24 GHz          0.1       0.5       1.5       2.5       4.6
+Ka 35 GHz         0.3       1.0       3.1       5.1       9.2
+77 GHz            0.9       3.5      10.6      17.7      31.8
+W 94 GHz          1.1       4.5      13.6      22.7      40.9
+
+MODERATE fog (M=0.05 g/m3, ~300 m vis)
+band           0.25km    1.00km    3.00km    5.00km    9.00km
+X 10 GHz          0.0       0.0       0.0       0.0       0.1
+K 24 GHz          0.0       0.1       0.2       0.3       0.5
+Ka 35 GHz         0.0       0.1       0.3       0.5       0.9
+77 GHz            0.1       0.4       1.1       1.8       3.2
+W 94 GHz          0.1       0.5       1.4       2.3       4.1
+
+=== 5. Radar-equation scaling from an automotive-class 77 GHz radar (assumed ref: 250 m on a 10 m2 target) ===
+  small GA aircraft (~1 m2)    detectable to ~  141 m
+  small UAS (~0.1 m2)          detectable to ~   79 m
+  tiny drone (~0.01 m2)        detectable to ~   44 m
+  reach 2 km on a 1 m2 target: ~46 dB more (Pt*G^2*integration), before fog/gas loss
+  reach 5 km on a 1 m2 target: ~62 dB more (Pt*G^2*integration), before fog/gas loss
+  reach 9 km on a 1 m2 target: ~72 dB more (Pt*G^2*integration), before fog/gas loss
+Our simulation's radar model assumes max range = 12000 m
